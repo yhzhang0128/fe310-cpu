@@ -91,7 +91,8 @@ $(bit): $(romgen) $(f)
 # Build .mcs
 mcs := $(BUILD_DIR)/obj/$(MODEL).mcs
 $(mcs): $(bit)
-	cd $(BUILD_DIR); vivado -nojournal -mode batch -source $(fpga_common_script_dir)/write_cfgmem.tcl -tclargs $(BOARD) $@ $<
+	riscv64-unknown-elf-objcopy -O binary hello.elf hello.bin
+	cd $(BUILD_DIR); vivado -nojournal -mode batch -source $(fpga_common_script_dir)/write_cfgmem.tcl -tclargs $(BOARD) $@ $< /media/yunhao/DATA/riscv/freedom/hello.bin
 
 .PHONY: mcs
 mcs: $(mcs)
