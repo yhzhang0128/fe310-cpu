@@ -1,0 +1,6 @@
+make
+addons
+rocketchip
+macros
+hardfloat
+chisel

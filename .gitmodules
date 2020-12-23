@@ -1,5 +1,5 @@
 [submodule "rocket-chip"]
-	path = rocket-chip
+	path = rocket-chip-original
 	url = https://github.com/ucb-bar/rocket-chip.git
 [submodule "sifive-blocks"]
 	path = sifive-blocks
