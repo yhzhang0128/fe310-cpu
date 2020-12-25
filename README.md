@@ -24,7 +24,7 @@ cp $(path of fe310-sdk)/software/egos/release/egos.elf ./
 ./build4411
 ```
 
-4. In Vivado, choose the memory device `mt25ql128-spi-x1_x2_x4` for Arty FPGA and program it with `builds/e300artydevkit/obj/E300ArtyDevKitFPGAChip.mcs`. Here is the [guide by SiFive](https://sifive.cdn.prismic.io/sifive%2Fed96de35-065f-474c-a432-9f6a364af9c8_sifive-e310-arty-gettingstarted-v1.0.6.pdf)
+4. In Vivado, choose the memory device `mt25ql128-spi-x1_x2_x4` for Arty FPGA and program it with `builds/e300artydevkit/obj/E300ArtyDevKitFPGAChip.mcs`. Here is the [guide by SiFive](https://sifive.cdn.prismic.io/sifive%2Fed96de35-065f-474c-a432-9f6a364af9c8_sifive-e310-arty-gettingstarted-v1.0.6.pdf) and another [guide by Diligent](https://reference.digilentinc.com/learn/programmable-logic/tutorials/arty-programming-guide/start).
 
 5. Open a shell and type `screen /dev/ttyUSB1 57600` to communicate with EGOS on Arty.
 
