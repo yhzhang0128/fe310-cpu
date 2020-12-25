@@ -1,3 +1,11 @@
+Notes for 4411
+==============
+
+```
+git clone --recursive git@github.coecis.cornell.edu:4411-riscv/fe310-cpu.git
+```
+
+
 Freedom
 =======
 
