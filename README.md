@@ -1,8 +1,27 @@
 Notes for 4411
 ==============
 
+1. Git clone will take a while because SiFive decided to include the whole toolchain in this repo.
+
 ```
 git clone --recursive git@github.coecis.cornell.edu:4411-riscv/fe310-cpu.git
+
+# or, if you have already cloned the repo without --recursive
+git clone git@github.coecis.cornell.edu:4411-riscv/fe310-cpu.git
+cd fe310-cpu
+git submodule update --init --recursive
+```
+
+2. Copy the binary executable compiled in `fe310-sdk` into this directory
+
+```
+cp $(path of fe310-sdk)/software/egos/release/egos.elf ./
+```
+
+3. Build the mcs file for FPGA. This takes ~20 minutes on my 8core desktop.
+
+```
+./build4411
 ```
 
 
