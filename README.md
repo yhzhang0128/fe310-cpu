@@ -24,6 +24,8 @@ cp $(path of fe310-sdk)/software/egos/release/egos.elf ./
 ./build4411
 ```
 
+4. In Vivado, choose the memory device `mt25ql128-spi-x1_x2_x4` for Arty FPGA and program it with `builds/e300artydevkit/obj/E300ArtyDevKitFPGAChip.mcs`
+
 
 Freedom
 =======
