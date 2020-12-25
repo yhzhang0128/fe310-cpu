@@ -1,7 +1,7 @@
 Notes for 4411
 ==============
 
-1. Git clone will take a while (7min on my desktop) because SiFive decided to include the whole toolchain in this repo.
+1. Git clone will take a while (5min on my desktop) because SiFive decided to include the whole toolchain in this repo.
 
 ```
 git clone --recursive git@github.coecis.cornell.edu:4411-riscv/fe310-cpu.git
