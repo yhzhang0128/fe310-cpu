@@ -15,7 +15,7 @@ import chisel3.internal.sourceinfo.SourceInfo
 import chisel3.experimental.dontTouch
 
 case class ICacheParams(
-    nSets: Int = 64,
+    nSets: Int = 18,
     nWays: Int = 4,
     rowBits: Int = 128,
     nTLBEntries: Int = 32,

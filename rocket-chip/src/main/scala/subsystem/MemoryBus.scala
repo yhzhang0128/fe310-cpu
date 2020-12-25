@@ -10,7 +10,7 @@ import freechips.rocketchip.tilelink._
 import freechips.rocketchip.util._
 
 // TODO: applies to all caches, for now
-case object CacheBlockBytes extends Field[Int](64)
+case object CacheBlockBytes extends Field[Int](128)
 
 /** L2 Broadcast Hub configuration */
 case class BroadcastParams(
