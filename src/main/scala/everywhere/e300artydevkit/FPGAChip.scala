@@ -116,10 +116,10 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
     // Header row 1: PB0-PB5
     IOBUF(ck_io(8),  dut.io.pins.gpio.pins(0))  // PWM0(0)
     IOBUF(ck_io(9),  dut.io.pins.gpio.pins(1))  // PWM0(1)
-    IOBUF(ck_io(10), dut.io.pins.gpio.pins(2))  // SPI CS(0) / PWM0(2)
-    IOBUF(ck_io(11), dut.io.pins.gpio.pins(3))  // SPI MOSI  / PWM0(3)
-    IOBUF(ck_io(12), dut.io.pins.gpio.pins(4))  // SPI MISO
-    IOBUF(ck_io(13), dut.io.pins.gpio.pins(5))  // SPI SCK
+    //IOBUF(ck_io(10), dut.io.pins.gpio.pins(2))  // SPI CS(0) / PWM0(2)
+    //IOBUF(ck_io(11), dut.io.pins.gpio.pins(3))  // SPI MOSI  / PWM0(3)
+    //IOBUF(ck_io(12), dut.io.pins.gpio.pins(4))  // SPI MISO
+    //IOBUF(ck_io(13), dut.io.pins.gpio.pins(5))  // SPI SCK
 
     dut.io.pins.gpio.pins(6).i.ival  := 0.U
     dut.io.pins.gpio.pins(7).i.ival  := 0.U
@@ -165,16 +165,31 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
     dut.io.pins.aon.pmu.dwakeup_n.i.ival := ~iobuf_btn_3.io.O & dut.io.pins.aon.pmu.dwakeup_n.o.ie
 
     // UART1 RX/TX pins are assigned to PMOD_D connector pins 0/1
-    IOBUF(ja_0, dut.io.pins.gpio.pins(25)) // UART1 TX
-    IOBUF(ja_1, dut.io.pins.gpio.pins(24)) // UART1 RX
+    //IOBUF(ja_0, dut.io.pins.gpio.pins(25)) // UART1 TX
+    //IOBUF(ja_1, dut.io.pins.gpio.pins(24)) // UART1 RX
+
+    // ss -> gpio.pins(2) -> cs(0) -> ja_0
+    // mosi -> gpio.pins(3) -> dq(0) -> ja_1
+    // miso -> gpio.pins(4) -> dq(1) -> ja_2
+    // sck -> gpio.pins(5) -> dq(2) -> ja_3
+    IOBUF(ja_0, dut.io.pins.gpio.pins(2))
+    IOBUF(ja_1, dut.io.pins.gpio.pins(3))
+    IOBUF(ja_2, dut.io.pins.gpio.pins(4))
+    IOBUF(ja_3, dut.io.pins.gpio.pins(5))
+    PULLUP(ja_0)
+    PULLUP(ja_1)
+    dut.io.pins.gpio.pins(5).i.ival    := slow_clock
+    //dut.io.pins.gpio.pins(5).i.ival    := IBUFG(IOBUF(ja_3).asClock).asUInt
+    //dut.io.pins.gpio.pins(2).i.ival  := 1.U
+    //dut.io.pins.gpio.pins(3).i.ival  := 1.U
 
     // SPI2 pins mapped to 6 pin ICSP connector (standard on later
     // arduinos) These are connected to some extra GPIO pins not connected
     // on the HiFive1 board
-    IOBUF(ck_ss,   dut.io.pins.gpio.pins(26))
-    IOBUF(ck_mosi, dut.io.pins.gpio.pins(27))
-    IOBUF(ck_miso, dut.io.pins.gpio.pins(28))
-    IOBUF(ck_sck,  dut.io.pins.gpio.pins(29))
+    //IOBUF(ck_ss,   dut.io.pins.gpio.pins(26))
+    //IOBUF(ck_mosi, dut.io.pins.gpio.pins(27))
+    //IOBUF(ck_miso, dut.io.pins.gpio.pins(28))
+    //IOBUF(ck_sck,  dut.io.pins.gpio.pins(29))
 
     // Use the LEDs for some more useful debugging things
     IOBUF(led_0, ck_rst)
