@@ -40,6 +40,7 @@ class E300ArtyDevKitPlatformIO(implicit val p: Parameters) extends Bundle {
     val jtag = new JTAGPins(() => PinGen(), false)
     val gpio = new GPIOPins(() => PinGen(), p(PeripheryGPIOKey)(0))
     val qspi = new SPIPins(() => PinGen(), p(PeripherySPIFlashKey)(0))
+    val sdspi = new SPIPins(() => PinGen(), p(PeripherySPIKey)(0))
     val aon = new MockAONWrapperPins()
   }
   val jtag_reset = Bool(INPUT)
@@ -79,12 +80,12 @@ class E300ArtyDevKitPlatform(implicit val p: Parameters) extends Module {
 
   val uart_pins = p(PeripheryUARTKey).map { c => Wire(new UARTPins(() => PinGen()))}
   val pwm_pins  = p(PeripheryPWMKey).map  { c => Wire(new PWMPins(() => PinGen(), c))}
-  val spi_pins  = p(PeripherySPIKey).map  { c => Wire(new SPIPins(() => PinGen(), c))}
+  // val spi_pins  = p(PeripherySPIKey).map  { c => Wire(new SPIPins(() => PinGen(), c))}
   val i2c_pins  = p(PeripheryI2CKey).map  { c => Wire(new I2CPins(() => PinGen()))}
 
   (uart_pins zip  sys_uart) map {case (p, r) => UARTPinsFromPort(p, r, clock = clock, reset = reset, syncStages = 0)}
   (pwm_pins  zip  sys_pwm)  map {case (p, r) => PWMPinsFromPort(p, r) }
-  (spi_pins  zip  sys_spi)  map {case (p, r) => SPIPinsFromPort(p, r, clock = clock, reset = reset, syncStages = 0)}
+  // (spi_pins  zip  sys_spi)  map {case (p, r) => SPIPinsFromPort(p, r, clock = clock, reset = reset, syncStages = 0)}
   (i2c_pins  zip  sys_i2c)  map {case (p, r) => I2CPinsFromPort(p, r, clock = clock, reset = reset, syncStages = 0)}
 
   //-----------------------------------------------------------------------
@@ -104,23 +105,23 @@ class E300ArtyDevKitPlatform(implicit val p: Parameters) extends Module {
   val iof_1 = sys.gpio(0).iof_1.get
 
   // SPI1 (0 is the dedicated)
-  BasePinToIOF(spi_pins(0).cs(0), iof_0(2))
-  BasePinToIOF(spi_pins(0).dq(0), iof_0(3))
-  BasePinToIOF(spi_pins(0).dq(1), iof_0(4))
-  BasePinToIOF(spi_pins(0).sck,   iof_0(5))
-  BasePinToIOF(spi_pins(0).dq(2), iof_0(6))
-  BasePinToIOF(spi_pins(0).dq(3), iof_0(7))
-  BasePinToIOF(spi_pins(0).cs(1), iof_0(8))
-  BasePinToIOF(spi_pins(0).cs(2), iof_0(9))
-  BasePinToIOF(spi_pins(0).cs(3), iof_0(10))
+  // BasePinToIOF(spi_pins(0).cs(0), iof_0(2))
+  // BasePinToIOF(spi_pins(0).dq(0), iof_0(3))
+  // BasePinToIOF(spi_pins(0).dq(1), iof_0(4))
+  // BasePinToIOF(spi_pins(0).sck,   iof_0(5))
+  // BasePinToIOF(spi_pins(0).dq(2), iof_0(6))
+  // BasePinToIOF(spi_pins(0).dq(3), iof_0(7))
+  // BasePinToIOF(spi_pins(0).cs(1), iof_0(8))
+  // BasePinToIOF(spi_pins(0).cs(2), iof_0(9))
+  // BasePinToIOF(spi_pins(0).cs(3), iof_0(10))
 
   // SPI2
-  BasePinToIOF(spi_pins(1).cs(0), iof_0(26))
-  BasePinToIOF(spi_pins(1).dq(0), iof_0(27))
-  BasePinToIOF(spi_pins(1).dq(1), iof_0(28))
-  BasePinToIOF(spi_pins(1).sck,   iof_0(29))
-  BasePinToIOF(spi_pins(1).dq(2), iof_0(30))
-  BasePinToIOF(spi_pins(1).dq(3), iof_0(31))
+  // BasePinToIOF(spi_pins(1).cs(0), iof_0(26))
+  // BasePinToIOF(spi_pins(1).dq(0), iof_0(27))
+  // BasePinToIOF(spi_pins(1).dq(1), iof_0(28))
+  // BasePinToIOF(spi_pins(1).sck,   iof_0(29))
+  // BasePinToIOF(spi_pins(1).dq(2), iof_0(30))
+  // BasePinToIOF(spi_pins(1).dq(3), iof_0(31))
 
   // I2C
   if (p(PeripheryI2CKey).length == 1) {
@@ -161,6 +162,9 @@ class E300ArtyDevKitPlatform(implicit val p: Parameters) extends Module {
 
   // Dedicated SPI Pads
   SPIPinsFromPort(io.pins.qspi, sys.qspi(0), clock = sys.clock, reset = sys.reset, syncStages = 3)
+
+  // SD Card SPI Pads
+  SPIPinsFromPort(io.pins.sdspi, sys.spi(0), clock = sys.clock, reset = sys.reset, syncStages = 3)
 
   // JTAG Debug Interface
   val sjtag = sys.debug.systemjtag.get

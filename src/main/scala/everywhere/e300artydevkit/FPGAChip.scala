@@ -168,20 +168,17 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
     //IOBUF(ja_0, dut.io.pins.gpio.pins(25)) // UART1 TX
     //IOBUF(ja_1, dut.io.pins.gpio.pins(24)) // UART1 RX
 
-    // ss -> gpio.pins(2) -> cs(0) -> ja_0
-    // mosi -> gpio.pins(3) -> dq(0) -> ja_1
-    // miso -> gpio.pins(4) -> dq(1) -> ja_2
-    // sck -> gpio.pins(5) -> dq(2) -> ja_3
-    IOBUF(ja_0, dut.io.pins.gpio.pins(2))
-    IOBUF(ja_1, dut.io.pins.gpio.pins(3))
-    IOBUF(ja_2, dut.io.pins.gpio.pins(4))
-    IOBUF(ja_3, dut.io.pins.gpio.pins(5))
-    PULLUP(ja_0)
-    PULLUP(ja_1)
-    dut.io.pins.gpio.pins(5).i.ival    := slow_clock
-    //dut.io.pins.gpio.pins(5).i.ival    := IBUFG(IOBUF(ja_3).asClock).asUInt
-    //dut.io.pins.gpio.pins(2).i.ival  := 1.U
-    //dut.io.pins.gpio.pins(3).i.ival  := 1.U
+    // ss   -> cs(0) -> ja_0
+    // mosi -> dq(0) -> ja_1
+    // miso -> dq(1) -> ja_2
+    // sck  -> sck   -> ja_3
+
+    IOBUF(ja_0,  dut.io.pins.sdspi.cs(0))
+    IOBUF(ja_1, dut.io.pins.sdspi.dq(0))
+    IOBUF(ja_2, dut.io.pins.sdspi.dq(1))
+    IOBUF(ja_3, dut.io.pins.sdspi.sck)
+    // PULLUP(ja_0)
+    // PULLUP(ja_1)
 
     // SPI2 pins mapped to 6 pin ICSP connector (standard on later
     // arduinos) These are connected to some extra GPIO pins not connected
