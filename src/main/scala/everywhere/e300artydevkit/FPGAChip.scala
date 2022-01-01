@@ -38,6 +38,7 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
   //-----------------------------------------------------------------------
 
   withClockAndReset(clock_65MHz, ck_rst) {
+  //withClockAndReset(clock_129MHz, ck_rst) {
     val dut = Module(new E300ArtyDevKitPlatform)
 
     //---------------------------------------------------------------------

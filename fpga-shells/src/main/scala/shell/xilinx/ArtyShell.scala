@@ -106,6 +106,11 @@ abstract class ArtyShell(implicit val p: Parameters) extends RawModule {
   val clock_32MHz    = Wire(Clock())
   val clock_65MHz    = Wire(Clock())
 
+  val clock_129MHz    = Wire(Clock())
+  val clock_258MHz    = Wire(Clock())
+  val clock_344MHz    = Wire(Clock())
+  
+
   val mmcm_locked    = Wire(Bool())
 
   val reset_core     = Wire(Bool())
@@ -134,6 +139,11 @@ abstract class ArtyShell(implicit val p: Parameters) extends RawModule {
   clock_8MHz         := ip_mmcm.io.clk_out1  // 8.388 MHz = 32.768 kHz * 256
   clock_65MHz        := ip_mmcm.io.clk_out2  // 65 Mhz
   clock_32MHz        := ip_mmcm.io.clk_out3  // 65/2 Mhz
+  clock_129MHz       := ip_mmcm.io.clk_out4
+  clock_258MHz       := ip_mmcm.io.clk_out5
+  clock_344MHz       := ip_mmcm.io.clk_out6
+
+
   ip_mmcm.io.resetn  := ck_rst
   mmcm_locked        := ip_mmcm.io.locked
 
