@@ -58,7 +58,7 @@ class E300DevKitPeripherals extends Config((site, here, up) => {
 class E300ArtyDevKitConfig extends Config(
   new E300DevKitPeripherals    ++
   new DefaultFreedomEConfig().alter((site,here,up) => {
-    case DTSTimebase => BigInt(32768)
+    case DTSTimebase => BigInt(65536)
     case JtagDTMKey => new JtagDTMConfig (
       idcodeVersion = 2,
       idcodePartNum = 0x000,
