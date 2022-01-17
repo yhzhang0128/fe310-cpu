@@ -91,8 +91,8 @@ $(bit): $(romgen) $(f)
 # Build .mcs
 mcs := $(BUILD_DIR)/obj/$(MODEL).mcs
 $(mcs): $(bit)
-	riscv64-unknown-elf-objcopy -O binary egos.elf egos.bin
-	cd $(BUILD_DIR); vivado -nojournal -mode batch -source $(fpga_common_script_dir)/write_cfgmem_egos.tcl -tclargs $(BOARD) $@ $< $(base_dir)/egos.bin $(base_dir)/romdisk
+	riscv64-unknown-elf-objcopy -O binary earth.elf earth.bin
+	cd $(BUILD_DIR); vivado -nojournal -mode batch -source $(fpga_common_script_dir)/write_cfgmem_egos.tcl -tclargs $(BOARD) $@ $< $(base_dir)/earth.bin $(base_dir)/romdisk
 
 .PHONY: mcs
 mcs: $(mcs)
