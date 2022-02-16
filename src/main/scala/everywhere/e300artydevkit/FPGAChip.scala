@@ -88,21 +88,24 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
     // data to both places, switch 3 (sw[3]) determines whether
     // input to UART comes from FTDI chip or gpio_16 (shield pin PD0)
 
-    val iobuf_ck0 = Module(new IOBUF())
-    iobuf_ck0.io.I := dut.io.pins.gpio.pins(16).o.oval
-    iobuf_ck0.io.T := ~dut.io.pins.gpio.pins(16).o.oe
-    attach(iobuf_ck0.io.IO, ck_io(0))   // UART0 RX
+    // val iobuf_ck0 = Module(new IOBUF())
+    // iobuf_ck0.io.I := dut.io.pins.gpio.pins(16).o.oval
+    // iobuf_ck0.io.T := ~dut.io.pins.gpio.pins(16).o.oe
+    // attach(iobuf_ck0.io.IO, ck_io(0))   // UART0 RX
 
-    val iobuf_uart_txd = Module(new IOBUF())
-    iobuf_uart_txd.io.I := dut.io.pins.gpio.pins(16).o.oval
-    iobuf_uart_txd.io.T := ~dut.io.pins.gpio.pins(16).o.oe
-    attach(iobuf_uart_txd.io.IO, uart_txd_in)
+    // val iobuf_uart_txd = Module(new IOBUF())
+    // iobuf_uart_txd.io.I := dut.io.pins.gpio.pins(16).o.oval
+    // iobuf_uart_txd.io.T := ~dut.io.pins.gpio.pins(16).o.oe
+    // attach(iobuf_uart_txd.io.IO, uart_txd_in)
 
     // gpio(16) input is shared between FTDI TX pin and the Arduino shield pin using SW[3]
     val sw_3_in = IOBUF(sw_3)
-    dut.io.pins.gpio.pins(16).i.ival := Mux(sw_3_in,
-                                            iobuf_ck0.io.O & dut.io.pins.gpio.pins(16).o.ie,
-                                            iobuf_uart_txd.io.O & dut.io.pins.gpio.pins(16).o.ie)
+    // dut.io.pins.gpio.pins(16).i.ival := Mux(sw_3_in,
+    //                                         iobuf_ck0.io.O & dut.io.pins.gpio.pins(16).o.ie,
+    //                                         iobuf_uart_txd.io.O & dut.io.pins.gpio.pins(16).o.ie)
+
+    // Modified: Do NOT use switch3 to choose uart input pin
+    IOBUF(uart_txd_in,  dut.io.pins.gpio.pins(16))
 
     IOBUF(uart_rxd_out, dut.io.pins.gpio.pins(17))
 
