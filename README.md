@@ -1,6 +1,6 @@
 Notes for 4411
 ==============
-
+0. Everything in this repo has been included in this [Docker image](https://hub.docker.com/repository/docker/yhzhang0128/arty-toolchain).
 1. Git clone will take a while (5min on my desktop) because SiFive decided to include the whole toolchain in this repo.
 
 ```
