@@ -12,11 +12,7 @@ cd fe310-cpu
 git submodule update --init --recursive
 ```
 
-2. Copy the binary executable compiled in `fe310-sdk` into this directory
-
-```
-cp $(path of fe310-sdk)/software/egos/release/egos.elf ./
-```
+2. Copy `earth.elf` and `disk.img` to the root directory of this repo
 
 3. Build the mcs file for FPGA. This takes 15 minutes on my 8core desktop.
 
