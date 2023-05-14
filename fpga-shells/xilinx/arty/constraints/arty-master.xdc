@@ -5,6 +5,8 @@
 
 ## Clock signal
 
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets IOBUF_5/O]
+
 set_property -dict { PACKAGE_PIN R2    IOSTANDARD SSTL135 } [get_ports { CLK100MHZ }]; #IO_L12P_T1_MRCC_34 Sch=ddr3_clk[200]
 create_clock -add -name sys_clk_pin -period 10.000 -waveform {0 5.000}  [get_ports { CLK100MHZ }];
 create_clock -add -name JTCK        -period 100   -waveform {0 50} [get_ports {jd_2}];
