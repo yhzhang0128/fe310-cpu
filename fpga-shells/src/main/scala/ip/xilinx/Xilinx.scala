@@ -9,6 +9,46 @@ import freechips.rocketchip.util.{ElaborationArtefacts}
 import sifive.blocks.devices.pinctrl.{BasePin}
 import sifive.fpgashells.clocks._
 
+//-------------------------------------------------------------------------
+// STARTUPE2
+//-------------------------------------------------------------------------
+/** STARTUPE2 -- this generates interface to the configuration logic control 
+  * and status signals.
+  * See "(UG470) 7 Series FPGAs Configuration User Guide"
+  */
+
+class STARTUPE2 extends BlackBox {
+  val io = new Bundle {
+    val CLK = Input(Bool())
+    val GSR = Input(Bool())
+    val GTS = Input(Bool())
+    val KEYCLEARB = Input(Bool())
+    val PACK = Input(Bool())
+    val USRCCLKO = Input(Bool())
+    val USRCCLKTS = Input(Bool())
+    val USRDONEO = Input(Bool())
+    val USRDONETS = Input(Bool())
+  }
+}
+
+object STARTUPE2 {
+
+  def apply(usrcclk0: Bool) = {
+    val startupe2 = Module(new STARTUPE2)
+    startupe2.io.CLK := false.B
+    startupe2.io.GSR := false.B
+    startupe2.io.GTS := false.B
+    startupe2.io.KEYCLEARB := false.B
+    startupe2.io.PACK := false.B
+    startupe2.io.USRCCLKO := usrcclk0
+    startupe2.io.USRCCLKTS := false.B
+    startupe2.io.USRDONEO := true.B
+    startupe2.io.USRDONETS := true.B
+
+    startupe2
+  }
+}
+
 //========================================================================
 // This file contains common devices used by our Xilinx FPGA flows and some
 // BlackBox modules used in the Xilinx FPGA flows

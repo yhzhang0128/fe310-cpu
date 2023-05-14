@@ -45,7 +45,8 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
     // SPI flash IOBUFs
     //---------------------------------------------------------------------
 
-    IOBUF(qspi_sck, dut.io.pins.qspi.sck)
+    STARTUPE2(dut.io.pins.qspi.sck.o.oval)
+    //IOBUF(qspi_sck, dut.io.pins.qspi.sck)
     IOBUF(qspi_cs,  dut.io.pins.qspi.cs(0))
 
     IOBUF(qspi_dq(0), dut.io.pins.qspi.dq(0))
@@ -131,11 +132,11 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
 
     // Header row 3: A0-A5 (we don't support using them as analog inputs)
     // just treat them as regular digital GPIOs
-    IOBUF(ck_io(15), dut.io.pins.gpio.pins(9))  // A1 = CS(2)
-    IOBUF(ck_io(16), dut.io.pins.gpio.pins(10)) // A2 = CS(3) / PWM2(0)
-    IOBUF(ck_io(17), dut.io.pins.gpio.pins(11)) // A3 = PWM2(1)
-    IOBUF(ck_io(18), dut.io.pins.gpio.pins(12)) // A4 = PWM2(2) / SDA
-    IOBUF(ck_io(19), dut.io.pins.gpio.pins(13)) // A5 = PWM2(3) / SCL
+    // IOBUF(ck_io(15), dut.io.pins.gpio.pins(9))  // A1 = CS(2)
+    // IOBUF(ck_io(16), dut.io.pins.gpio.pins(10)) // A2 = CS(3) / PWM2(0)
+    // IOBUF(ck_io(17), dut.io.pins.gpio.pins(11)) // A3 = PWM2(1)
+    // IOBUF(ck_io(18), dut.io.pins.gpio.pins(12)) // A4 = PWM2(2) / SDA
+    // IOBUF(ck_io(19), dut.io.pins.gpio.pins(13)) // A5 = PWM2(3) / SCL
 
     // Mirror outputs of GPIOs with PWM peripherals to RGB LEDs on Arty
     // assign RGB LED0 R,G,B inputs = PWM0(1,2,3) when iof_1 is active
@@ -150,9 +151,9 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
     IOBUF(led1_b, dut.io.pins.gpio.pins(22))
 
     // and RGB LED2 R,G,B inputs = PWM2(1,2,3) when iof_1 is active
-    IOBUF(led2_r, dut.io.pins.gpio.pins(11))
-    IOBUF(led2_g, dut.io.pins.gpio.pins(12))
-    IOBUF(led2_b, dut.io.pins.gpio.pins(13))
+    // IOBUF(led2_r, dut.io.pins.gpio.pins(11))
+    // IOBUF(led2_g, dut.io.pins.gpio.pins(12))
+    // IOBUF(led2_b, dut.io.pins.gpio.pins(13))
 
     // Only 19 out of 20 shield pins connected to GPIO pins
     // Shield pin A5 (pin 14) left unconnected
