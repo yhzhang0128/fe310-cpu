@@ -12,7 +12,7 @@ import sifive.blocks.devices.gpio._
 import sifive.blocks.devices.spi._
 
 import sifive.fpgashells.shell.xilinx.artyshell.{ArtyShell}
-import sifive.fpgashells.ip.xilinx.{IBUFG, IOBUF, PULLUP, PowerOnResetFPGAOnly}
+import sifive.fpgashells.ip.xilinx.{IBUFG, IOBUF, PULLUP, PowerOnResetFPGAOnly, STARTUPE2}
 
 //-------------------------------------------------------------------------
 // E300ArtyDevKitFPGAChip
@@ -100,7 +100,7 @@ class E300ArtyDevKitFPGAChip(implicit override val p: Parameters) extends ArtySh
     // attach(iobuf_uart_txd.io.IO, uart_txd_in)
 
     // gpio(16) input is shared between FTDI TX pin and the Arduino shield pin using SW[3]
-    val sw_3_in = IOBUF(sw_3)
+    // val sw_3_in = IOBUF(sw_3)
     // dut.io.pins.gpio.pins(16).i.ival := Mux(sw_3_in,
     //                                         iobuf_ck0.io.O & dut.io.pins.gpio.pins(16).o.ie,
     //                                         iobuf_uart_txd.io.O & dut.io.pins.gpio.pins(16).o.ie)

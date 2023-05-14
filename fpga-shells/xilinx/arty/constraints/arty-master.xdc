@@ -14,7 +14,7 @@ create_clock -add -name JTCK        -period 100   -waveform {0 50} [get_ports {j
 set_property -dict { PACKAGE_PIN H14   IOSTANDARD LVCMOS33 } [get_ports { sw_0 }]; #IO_L20N_T3_A19_15 Sch=sw[0]
 set_property -dict { PACKAGE_PIN H18   IOSTANDARD LVCMOS33 } [get_ports { sw_1 }]; #IO_L21P_T3_DQS_15 Sch=sw[1]
 set_property -dict { PACKAGE_PIN G18   IOSTANDARD LVCMOS33 } [get_ports { sw_2 }]; #IO_L21N_T3_DQS_A18_15 Sch=sw[2]
-set_property -dict { PACKAGE_PIN M5    IOSTANDARD SSTL135 } [get_ports { sw_3 }]; #IO_L6N_T0_VREF_34 Sch=sw[3]
+#set_property -dict { PACKAGE_PIN M5    IOSTANDARD SSTL135 } [get_ports { sw_3 }]; #IO_L6N_T0_VREF_34 Sch=sw[3]
 
 
 ##RGB LEDs
