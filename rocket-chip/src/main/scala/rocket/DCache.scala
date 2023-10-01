@@ -705,7 +705,7 @@ class DCacheModule(outer: DCache) extends HellaCacheModule(outer) {
   io.cpu.s2_xcpt := Mux(RegNext(s1_xcpt_valid), RegEnable(s1_xcpt, s1_valid_not_nacked), 0.U.asTypeOf(s1_xcpt))
 
   if (usingDataScratchpad) {
-    require(!usingVM) // therefore, req.phys means this is a slave-port access
+    //require(!usingVM) // therefore, req.phys means this is a slave-port access
     when (s2_isSlavePortAccess) {
       assert(!s2_valid || s2_hit_valid)
       io.cpu.s2_xcpt := 0.U.asTypeOf(io.cpu.s2_xcpt)
@@ -921,6 +921,10 @@ class DCacheModule(outer: DCache) extends HellaCacheModule(outer) {
     cover(cond, s"DCACHE_$label", "MemorySystem;;" + desc)
   def ccoverNotScratchpad(cond: Bool, label: String, desc: String)(implicit sourceInfo: SourceInfo) =
     if (!usingDataScratchpad) ccover(cond, label, desc)
+
+  Console.println(s"Yunhao in DCache.scala")
+  Console.println(tagLSB)          // 12
+  Console.println(pgIdxBits)       // 12
 
   require(!usingVM || tagLSB <= pgIdxBits)
   def tagLSB: Int = untagBits

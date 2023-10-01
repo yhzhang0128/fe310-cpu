@@ -21,8 +21,8 @@ class DefaultFreedomEConfig extends Config (
   new WithNBreakpoints(2)        ++
   new WithNExtTopInterrupts(0)   ++
   new WithJtagDTM                ++
-  new WithL1ICacheWays(2)        ++
-  new WithL1ICacheSets(256)      ++
+  new WithL1ICacheWays(16)       ++
+  new WithL1ICacheSets(32)       ++
   new WithDefaultBtb             ++
   new TinyConfig
 )

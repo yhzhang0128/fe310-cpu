@@ -115,6 +115,13 @@ class ICacheModule(outer: ICache) extends LazyModuleImp(outer)
   val dECC = cacheParams.dataCode
 
   require(isPow2(nSets) && isPow2(nWays))
+
+  Console.println(s"Yunhao in ICache.scala")
+  Console.println(pgIdxBits)          // 12
+  Console.println(untagBits)          // 12
+  Console.println(blockOffBits)       // 7
+  Console.println(idxBits)            // 5
+  Console.println(cacheParams.nSets)  // 32
   require(!usingVM || pgIdxBits >= untagBits)
 
   val scratchpadOn = RegInit(false.B)
