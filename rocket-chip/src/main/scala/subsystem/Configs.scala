@@ -79,7 +79,7 @@ class With1TinyCore extends Config((site, here, up) => {
   case XLen => 32
   case RocketTilesKey => List(RocketTileParams(
       core = RocketCoreParams(
-        //useVM = false,
+        useVM = false,
         fpu = None,
         mulDiv = Some(MulDivParams(mulUnroll = 8))),
       btb = None,
@@ -87,10 +87,10 @@ class With1TinyCore extends Config((site, here, up) => {
         rowBits = site(SystemBusKey).beatBits,
         //nSets = 256, // 32Kb scratchpad
         //nSets = 512, // 64Kb scratchpad
-        //nSets = 1024, // 128Kb scratchpad
-        //nWays = 1,
-        nSets = 32, // 4Kb scratchpad
+        nSets = 1024, // 128Kb scratchpad
         nWays = 1,
+        // nSets = 32, // 4Kb scratchpad for useVM=true
+        // nWays = 1,
         nTLBEntries = 4,
         nMSHRs = 0,
         blockBytes = site(CacheBlockBytes),
